@@ -11,17 +11,26 @@ import functools
 import time
 import datetime
 
-client = commands.Bot(description="Here is some command for you", command_prefix=commands.when_mentioned_or("$"), pm_help = False)
+Forbidden= discord.Embed(title="Permission Denied", description="1) Please check whether you have permission to perform this action or not. \n2) Please check whether my role has permission to perform this action in this channel or not. \n3) Please check my role position.", color=0x00ff00)
+client = commands.Bot(description="MultiVerse Official Bot", command_prefix=commands.when_mentioned_or("$"), pm_help = True)
 
 
+async def status_task():
+    while True:
+        await client.change_presence(game=discord.Game(name='for $help'))
+        await asyncio.sleep(5)
+        await client.change_presence(game=discord.Game(name='with '+str(len(set(client.get_all_members())))+' users'))
+        await asyncio.sleep(5)
+        await client.change_presence(game=discord.Game(name='in '+str(len(client.servers))+' servers'))
+        await asyncio.sleep(5)
 
-@client.event
-async def on_ready():
-	print('Logged in as '+client.user.name+'')
-	print('--------')
-	print('--------')
-	print('Started Soyal') #add_your_bot_name_here
-	return await client.change_presence(game=discord.Game(name='Soyal || $help ')) #add_your_bot_status_here
+async def role_task():
+    while True:
+        server = discord.utils.get(client.servers, id="518781441945894923")
+        role = discord.utils.get(server.roles, name='Rainbow')
+        r, g, b = tuple(int(x * 255) for x in colorsys.hsv_to_rgb(random.random(), 1, 1))
+        await client.edit_role(server, role, color = discord.Color((r << 16) + (g << 8) + b))
+        await asyncio.sleep(30)
 	
 def is_owner(ctx):
     return ctx.message.author.id == "472680171451973632,485868646854557696" #replace_it_with_your_discord_id
