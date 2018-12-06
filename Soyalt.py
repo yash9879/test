@@ -11,7 +11,7 @@ import functools
 import time
 import datetime
 
-client = commands.Bot(description="Here is some command for you", command_prefix=commands.when_mentioned_or("s!"), pm_help = False)
+client = commands.Bot(description="Here is some command for you", command_prefix=commands.when_mentioned_or("$"), pm_help = False)
 
 
 
@@ -21,7 +21,7 @@ async def on_ready():
 	print('--------')
 	print('--------')
 	print('Started Soyal') #add_your_bot_name_here
-	return await client.change_presence(game=discord.Game(name='Soyal || s!help ')) #add_your_bot_status_here
+	return await client.change_presence(game=discord.Game(name='Soyal || $help ')) #add_your_bot_status_here
 	
 def is_owner(ctx):
     return ctx.message.author.id == "472680171451973632,485868646854557696" #replace_it_with_your_discord_id
