@@ -23,14 +23,14 @@ async def status_task():
         await asyncio.sleep(5)
         await client.change_presence(game=discord.Game(name='in '+str(len(client.servers))+' servers'))
         await asyncio.sleep(5)
-
-async def role_task():
-    while True:
-        server = discord.utils.get(client.servers, id="518781441945894923")
-        role = discord.utils.get(server.roles, name='Rainbow')
-        r, g, b = tuple(int(x * 255) for x in colorsys.hsv_to_rgb(random.random(), 1, 1))
-        await client.edit_role(server, role, color = discord.Color((r << 16) + (g << 8) + b))
-        await asyncio.sleep(30)
+@client.event
+async def on_ready():
+    print('Logged in as '+client.user.name+' (ID:'+client.user.id+') | Connected to '+str(len(client.servers))+' servers | Connected to '+str(len(set(client.get_all_members())))+' users')
+    print('--------')
+    print('--------')
+    print('Started New here ')
+    print('Created by Soyal')
+    client.loop.create_task(status_task())
 	
 def is_owner(ctx):
     return ctx.message.author.id == "472680171451973632,485868646854557696" #replace_it_with_your_discord_id
