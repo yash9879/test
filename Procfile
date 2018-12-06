@@ -1,1 +1,1 @@
-worker: python Soyalt.py
+worker: python Soyalk.py
