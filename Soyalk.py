@@ -165,6 +165,15 @@ async def on_member_join(member):
             embed.add_field(name='Time of joining', value=member.joined_at)
             await client.send_message(channel, embed=embed) 
 
+
+	@client.command(pass_context = True)
+@commands.has_permissions(administrator=True)
+async def say(ctx, *, msg = None):
+    await client.delete_message(ctx.message)
+
+    if not msg: await client.say("Please specify a message to send")
+    else: await client.say(msg)
+    return	
 	
 	
 client.run(os.getenv('Token'))
