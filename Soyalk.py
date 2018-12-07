@@ -143,12 +143,15 @@ async def on_member_remove(member):
             embed.set_thumbnail(url=member.avatar_url)
             await client.send_message(channel, embed=embed)
 
+		
+		
 @client.event
 async def on_member_join(member):
     role = discord.utils.get(member.server.roles, name='Members')
     await client.add_roles(member, role)	
 
-        
+      
+
 @client.event
 async def on_member_join(member):
     for channel in member.server.channels:
