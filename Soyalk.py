@@ -175,5 +175,22 @@ async def say(ctx, *, msg = None):
     else: await client.say(msg)
     return	
 	
+
+	@client.command(pass_context = True)
+@commands.has_permissions(administrator=True)
+async def rolesetup(ctx):
+    author = ctx.message.author
+    server = ctx.message.server
+    mod_perms = discord.Permissions(manage_messages=True, kick_members=True, manage_nicknames =True,mute_members=True)
+    admin_perms = discord.Permissions(ADMINISTRATOR=True)
+
+    await client.create_role(author.server, name="Owner", permissions=admin_perms)
+    await client.create_role(author.server, name="Admin", permissions=admin_perms)
+    await client.create_role(author.server, name="Senior Moderator", permissions=mod_perms)
+    await client.create_role(author.server, name="Senior Moderator")
+    await client.create_role(author.server, name="Moderator", permissions=mod_perms)
+    await client.create_role(author.server, name="Muted")
+    await client.create_role(author.server, name="Friend of Owner")
+	
 	
 client.run(os.getenv('Token'))
