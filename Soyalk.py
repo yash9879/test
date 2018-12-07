@@ -28,7 +28,7 @@ async def on_ready():
     print('Logged in as '+client.user.name+' (ID:'+client.user.id+') | Connected to '+str(len(client.servers))+' servers | Connected to '+str(len(set(client.get_all_members())))+' users')
     print('--------')
     print('--------')
-    print('Started New here ')
+    print('Started Bot maker & helper')
     print('Created by Soyal')
     client.loop.create_task(status_task())
 	
@@ -174,23 +174,6 @@ async def say(ctx, *, msg = None):
     if not msg: await client.say("Please specify a message to send")
     else: await client.say(msg)
     return	
-	
-
-	@client.command(pass_context = True)
-@commands.has_permissions(administrator=True)
-async def rolesetup(ctx):
-    author = ctx.message.author
-    server = ctx.message.server
-    mod_perms = discord.Permissions(manage_messages=True, kick_members=True, manage_nicknames =True,mute_members=True)
-    admin_perms = discord.Permissions(ADMINISTRATOR=True)
-
-    await client.create_role(author.server, name="Owner", permissions=admin_perms)
-    await client.create_role(author.server, name="Admin", permissions=admin_perms)
-    await client.create_role(author.server, name="Senior Moderator", permissions=mod_perms)
-    await client.create_role(author.server, name="Senior Moderator")
-    await client.create_role(author.server, name="Moderator", permissions=mod_perms)
-    await client.create_role(author.server, name="Muted")
-    await client.create_role(author.server, name="Friend of Owner")
 	
 	
 client.run(os.getenv('Token'))
